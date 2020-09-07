@@ -1,15 +1,16 @@
 # Program to read financial data of a company and perform analysis
+# Written by Matt Taylor
 import os
 import csv
 
 # Initialising variables to be used later
 num_months = 0
 total_profit = 0
-previous_profit = 867884
 profit_change = 0
 total_change = 0
 max_profit = 0
 min_profit = 0
+x = 0
 
 # Set the path for the file we are analysing
 bank_path = os.path.join("Resources/budget_data.csv")
@@ -20,6 +21,11 @@ with open(bank_path) as file:
     next(bank_data,None)
 
     for row in bank_data:
+        # On the first loop, find the profit/loss
+        if x == 0:
+            previous_profit = int(row[1])
+            x += 1
+            
         # Total amount of months in the dataset
         num_months += 1
 
@@ -45,12 +51,12 @@ with open(bank_path) as file:
 
 average_change = round(total_change/(num_months-1),2)
 
-# Set the path for the output CSV
-output_path = os.path.join("analysis/output.csv")
+# Set the path for the output TXT
+output_path = os.path.join("analysis/output.txt")
 
-# Create the CSV with the summary results
-with open(output_path, "w",newline="") as csvfile:
-    csvwriter = csv.writer(csvfile,delimiter=",")
+# Create the TXT file with the summary results
+with open(output_path, "w",newline="") as file:
+    csvwriter = csv.writer(file,delimiter=",")
 
     csvwriter.writerow(["Financial Analysis"])
     csvwriter.writerow(["----------------------------"])
