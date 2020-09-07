@@ -36,6 +36,10 @@ percent_otooley = 100 * candidate_votes["O'Tooley"] / total_votes
 # Find the key with the maximum value in the dictionary
 winner = max(candidate_votes, key=candidate_votes.get)
 
+# Creating the strings to be printed later
+khan_print = "Khan: " + str("%.3f" % percent_khan) + "% (" + str(candidate_votes["Khan"]) + ")" 
+correy_print = "Correy: " + str("%.3f" % percent_correy) + "% (" + str(candidate_votes["Correy"]) + ")" 
+li_print = "Li: " + str("%.3f" % percent_li) + "% (" + str(candidate_votes["Li"]) + ")" 
 otooley_print = "O'Tooley: " + str("%.3f" % percent_li) + "% (" + str(candidate_votes["O'Tooley"]) + ")" 
 
 # Outputting summary results to the terminal
@@ -43,28 +47,28 @@ print("Election Results")
 print("----------------------------")
 print(f"Total Votes: {total_votes}")
 print("----------------------------")
-print(f'Khan: {"%.3f" % percent_khan}% ({candidate_votes["Khan"]})')
-print(f'Correy: {"%.3f" % percent_correy}% ({candidate_votes["Correy"]})')
-print(f'Li: {"%.3f" % percent_li}% ({candidate_votes["Li"]})')
+print(khan_print)
+print(correy_print)
+print(li_print)
 print(otooley_print)
 print("----------------------------")
 print(f"Winner: {winner}")
 print("----------------------------")
 
-# Set the path for the output CSV
-output_path = os.path.join("analysis/output.csv")
+# Set the path for the output TXT file
+output_path = os.path.join("analysis/output.txt")
 
-# Create the CSV with the summary results
-with open(output_path, "w",newline="") as csvfile:
-    csvwriter = csv.writer(csvfile,delimiter=",")
+# Create the TXT file with the summary results
+with open(output_path, "w",newline="") as file:
+    csvwriter = csv.writer(file,delimiter=",")
 
     csvwriter.writerow(["Election Results"])
     csvwriter.writerow(["----------------------------"])
     csvwriter.writerow([f"Total Votes: {total_votes}"])
     csvwriter.writerow(["----------------------------"])
-    csvwriter.writerow([f'Khan: {"%.3f" % percent_khan}% ({candidate_votes["Khan"]})'])
-    csvwriter.writerow([f'Correy: {"%.3f" % percent_correy}% ({candidate_votes["Correy"]})'])
-    csvwriter.writerow([f'Li: {"%.3f" % percent_li}% ({candidate_votes["Li"]})'])
+    csvwriter.writerow([khan_print])
+    csvwriter.writerow([correy_print])
+    csvwriter.writerow([li_print])
     csvwriter.writerow([otooley_print])
     csvwriter.writerow(["----------------------------"])
     csvwriter.writerow([f"Winner: {winner}"])
